@@ -10,7 +10,11 @@ Proyecto construido con :
 * Python `3.10.11` 
 
 * Django `5.0.4`
+
+* Bootstrap `4.3.1`
+
 * SQLite
+
 * Muchas ganas de pasar el semestre <3 
 
 ---
@@ -19,6 +23,8 @@ Proyecto construido con :
 
   - [Marcos Reyes](https://github.com/MarcosKingsDuoc)
   - [Felipe Quintul](https://github.com/felipeiqg07)
-  - [Benjamin Soto](https://github.com/benja-infinity)
- 
-   
+  - [Benjamín Soto](https://github.com/benja-infinity)
+
+
+
+    
