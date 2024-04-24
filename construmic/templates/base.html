@@ -20,7 +20,9 @@
     </main>
     
     <footer>
-        <!-- Aquí puedes incluir el contenido del pie de página común a todas las páginas -->
+        {% block footer %}
+         <!-- Aquí puedes incluir el contenido del pie de página común a todas las páginas -->
+        {% endblock%}
     </footer>
 
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
