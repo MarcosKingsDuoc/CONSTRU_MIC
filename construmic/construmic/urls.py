@@ -19,10 +19,12 @@ from django.urls import path
 
 from .views import (
     index_page, 
-    productos_page)
+    productos_page,contacto_page,ofertas_page)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index_page),
-    path('productos/', productos_page)
+    path('productos/', productos_page),
+    path('ofertas/', ofertas_page),
+    path('contacto/', contacto_page),
 ]
