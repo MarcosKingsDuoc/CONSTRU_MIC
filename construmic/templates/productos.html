@@ -19,5 +19,28 @@
 {% block content %}
 
 
+<div class="row">
+
+    {% for producto in productos %}
+    <div class="card" style="width: 18rem;">
+        
+        <img class="card-img-top" src=".../100px180/" alt="Card image cap">
+
+        <div class="card-body">
+          <h5 class="card-title">{{ producto.nombre }}</h5>
+          <p class="card-text">${{ producto.precio }}</p>
+          <p class="card-text">Categoria: {{ producto.categoria }}</p>
+          <p class="card-text">Dimensiones: {{ producto.alto }} x {{ producto.largo }} x {{ producto.ancho }} cm</p>
+          <p class="card-text">Peso: {{ producto.peso }}kg</p>
+          <p class="card-text">Descripcion: {{ producto.descripcion }}</p>
+          <p class="card-text">Estado del producto: {{ producto.get_estado_display }}</p>
+          <a href="#" class="btn btn-primary">Comprar</a>
+        </div>
+      </div>
+
+    {% endfor %}
+
+</div>
+
 
 {% endblock %}
