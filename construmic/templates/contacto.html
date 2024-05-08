@@ -7,7 +7,7 @@
 
 <div class="container mt-4">
     <h1>Contacto</h1>
-    <div style="display: flex; align-items: center;">
+    <div style="display: flex; align-items: center; margin-bottom: 30px;">
         <img src="{% static 'img/image_example.png' %}" alt="" style="width: 100px; height: auto; margin-right: 20px;">
         <p>¿Necesitas contactarnos? Aquí encontarás todos nuestros métodos de contacto.</p>
     </div>
@@ -17,5 +17,28 @@
 
 
 {% block content %}
+
+<div class="card">
+    <div class="card-body">
+        <form>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Nombre y apellidos</label>
+              <input type="name" class="form-control" id="nameInput" aria-describedby="emailHelp" placeholder="Nombre y apellidos">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Correo electrónico</label>
+              <input type="email" class="form-control" id="EmailInput" aria-describedby="emailHelp" placeholder="Ingrese su correo electrónico">
+            </div>
+    
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Mensaje</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea>
+            </div>
+    
+            <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+          </form>
+    </div>
+  </div>
+
 
 {% endblock %}
