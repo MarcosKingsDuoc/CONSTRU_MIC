@@ -24,7 +24,7 @@
     {% endif %}
     <div class="card">
         <div class="card-body">
-            <form method="post" action="{% url 'contacto_page' %}">
+            <form id="contactForm" method="post" action="{% url 'contacto_page' %}">
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="nameInput">Nombre y apellidos</label>
@@ -33,14 +33,45 @@
                 <div class="form-group">
                     <label for="EmailInput">Correo electrónico</label>
                     <input type="email" class="form-control" id="EmailInput" name="correo" placeholder="Ingrese su correo electrónico" required>
+                    <div id="emailError" class="invalid-feedback"></div>
                 </div>
                 <div class="form-group">
                     <label for="MensajeInput">Mensaje</label>
-                    <textarea class="form-control" id="MensajeInput" name="mensaje" rows="4" required></textarea>
+                    <textarea class="form-control" id="MensajeInput" name="mensaje" rows="4" placeholder="Ingrese su mensaje" required></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Enviar mensaje</button>
             </form>
         </div>
     </div>
 </div>
+<script>
+    document.getElementById("contactForm").addEventListener("submit", function(event) {
+        var nombres = document.getElementById("nameInput").value.trim();
+        var correo = document.getElementById("EmailInput").value.trim();
+        var mensaje = document.getElementById("MensajeInput").value.trim();
+
+        // Validar que los campos no estén vacíos
+        if (nombres === '' || correo === '' || mensaje === '') {
+            alert("Por favor, complete todos los campos.");
+            event.preventDefault();
+            return;
+        }
+
+        // Validar la sintaxis del correo electrónico
+        var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(correo)) {
+            document.getElementById("emailError").innerText = "El formato del correo electrónico no es válido.";
+            event.preventDefault();
+            return;
+        }
+
+        // Validar la longitud del mensaje
+        if (mensaje.length > 2000) {
+            alert("El mensaje no puede exceder los 2000 caracteres.");
+            event.preventDefault();
+            return;
+        }
+    });
+</script>
 {% endblock %}
+
