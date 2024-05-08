@@ -17,9 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+
 from .views import (
     index_page, 
-    productos_page,contacto_page,ofertas_page)
+    productos_page,
+    contacto_page,
+    ofertas_page,)
 
 # from CarritoApp.views import tienda
 
@@ -28,6 +31,6 @@ urlpatterns = [
     path('', index_page),
     path('productos/', productos_page),
     path('ofertas/', ofertas_page),
-    path('contacto/', contacto_page),
+    path('contacto/', contacto_page, name='contacto_page'),
     # path('tienda/', tienda)
 ]
