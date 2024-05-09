@@ -7,7 +7,9 @@ from ContactoApp.models import FormularioContacto
 from CarritoApp.models import Producto
 
 def index_page(request):
-    return render(request, 'index.html')
+    message = request.GET.get('message', None)
+    return render(request, 'index.html', {'message': message})
+
 
 def productos_page(request):
     producutos = Producto.objects.all()
@@ -38,9 +40,4 @@ def contacto_page(request):
             messages.error(request, 'Por favor, complete todos los campos.')
     return render(request, 'contacto.html')
 
-def iniciar_sesion_page(request):
-    return render(request, 'iniciar-sesion.html')
-
-def registrarse_page(request):
-    return render(request, 'registrarse.html')
 
