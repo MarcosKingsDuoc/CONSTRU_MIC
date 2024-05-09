@@ -37,3 +37,10 @@ def contacto_page(request):
         else:
             messages.error(request, 'Por favor, complete todos los campos.')
     return render(request, 'contacto.html')
+
+def iniciar_sesion_page(request):
+    return render(request, 'iniciar-sesion.html')
+
+def registrarse_page(request):
+    return render(request, 'registrarse.html')
+

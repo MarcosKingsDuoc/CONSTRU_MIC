@@ -22,15 +22,19 @@ from .views import (
     index_page, 
     productos_page,
     contacto_page,
-    ofertas_page,)
+    ofertas_page,
+    iniciar_sesion_page,
+    registrarse_page)
 
 # from CarritoApp.views import tienda
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index_page),
-    path('productos/', productos_page),
-    path('ofertas/', ofertas_page),
+    path('', index_page, name='inicio_page'),
+    path('productos/', productos_page, name='productos_page'),
+    path('ofertas/', ofertas_page, name='ofertas_page'),
     path('contacto/', contacto_page, name='contacto_page'),
+    path('iniciar_sesion/', iniciar_sesion_page, name='iniciar_sesion_page'),
+    path('registrarse/', registrarse_page, name='registrarse_page')
     # path('tienda/', tienda)
 ]
