@@ -1,19 +1,27 @@
 {% extends 'base/base.html' %}
+{% load static %}
 {% load widget_tweaks %}
 
 {% block title %}Registrarse{% endblock %}
 
-{% block header_page %}
+{% block header_page %} 
+<div class="container mt-4">
+    <h1>Registrarse</h1>
+    <div style="display: flex; align-items: center; margin-bottom: 30px;">
+        <img class="logo" src="{% static 'img/logo_construmic.png' %}" alt="">
+        <a href="{% url 'iniciar_sesion_page' %}"><h5> ¿Ya tienes cuenta? Iniciar sesión</h5></a>
+    </div>
+</div>
 {% endblock %}
 
 {% block content %}
 
 
 
-<div class="container mt-5">
+<div class="container mt-5" >
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="card">
+            <div class="card" style="margin-bottom: 100px;">
                 <div class="card-header">Registrarse</div>
                 <div class="card-body">
                     <form method="post">
