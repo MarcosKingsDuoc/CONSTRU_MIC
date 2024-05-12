@@ -1,14 +1,25 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import messages
+
+
+
+
+from CarritoApp.models import Producto
 
 def index_page(request):
-    return render(request, 'index.html')
+
+    message = request.GET.get('message', None)
+    return render(request, 'index.html', {'message': message})
+
 
 def productos_page(request):
-    return render(request, 'productos.html')
+    producutos = Producto.objects.all()
+    return render(request, 'productos.html', {'productos':producutos})
 
 def ofertas_page(request):
     return render(request, 'ofertas.html')
 
-def contacto_page(request):
-    return render(request, 'contacto.html')
+
+
+
 

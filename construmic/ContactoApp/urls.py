@@ -18,19 +18,11 @@ from django.contrib import admin
 from django.urls import path, include
 
 
-from .views import (
-    index_page, 
-    productos_page,
-    ofertas_page,)
+from .views import contacto_page
 
 # from CarritoApp.views import tienda
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', index_page, name='inicio_page'),
-    path('productos/', productos_page, name='productos_page'),
-    path('ofertas/', ofertas_page, name='ofertas_page'),
-    path('accounts/', include('Accounts.urls')),
-    path('contacto/', include('ContactoApp.urls')),
+    path('formulario/', contacto_page, name='contacto_page'),
     # path('tienda/', tienda)
 ]
