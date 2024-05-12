@@ -1,18 +1,41 @@
 {% extends 'base/base.html' %}
-{% load static %}
+{% load widget_tweaks %}
 
 {% block title %}Iniciar sesión{% endblock %}
 
-{% block header_page %} 
+{% block header_page %}
 {% endblock %}
 
 {% block content %}
 
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Iniciar sesión</div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="id_username">Correo electronico:</label>
+                            {{ form.username }}
+                            {% for error in form.username.errors %}
+                                <span class="text-danger">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        <div class="form-group">
+                            <label for="id_password">Contraseña:</label>
+                            {{ form.password }}
+                            {% for error in form.password.errors %}
+                                <span class="text-danger">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<h2>Iniciar sesión</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Iniciar sesión</button>
-    </form>
 {% endblock %}

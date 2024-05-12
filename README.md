@@ -13,6 +13,8 @@ Proyecto construido con :
 
 * Bootstrap `4.3.1`
 
+* django-widget-tweaks  `1.5.0`
+
 * SQLite
 
 * Muchas ganas de pasar el semestre <3 

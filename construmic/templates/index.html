@@ -8,12 +8,17 @@
 {% block header_page %} 
 
 <div class="container mt-4">
+    {% if user.is_authenticated %}
+    <h1>Bienvenido a CONSTRU_MIC, {{ user.nombre }} {{ user.apellidos }}</h1>
+    {% else %}
     <h1>Bienvenido a CONSTRU_MIC</h1>
+    {% endif %}
     <div style="display: flex; align-items: center;">
       <img class="logo" src="{% static 'img/logo_construmic.png' %}" alt="">
     <p>Tienda de retail dedicada al hotel desde 2024!</p>
     </div>
 </div>
+
 
 {% endblock %}
 

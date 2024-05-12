@@ -1,21 +1,69 @@
-
-
 {% extends 'base/base.html' %}
-{% load static %}
+{% load widget_tweaks %}
 
-
-{% block title %}Iniciar sesión{% endblock %}
+{% block title %}Registrarse{% endblock %}
 
 {% block header_page %}
 {% endblock %}
 
 {% block content %}
 
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Registrarse</div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-group{% if form.email.errors %} has-error{% endif %}">
+                            <label for="{{ form.email.id_for_label }}">Correo electrónico:</label>
+                            {% render_field form.email class+="form-control" %}
+                            {% for error in form.email.errors %}
+                                <span class="text-danger">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        <div class="form-group{% if form.nombre.errors %} has-error{% endif %}">
+                            <label for="{{ form.nombre.id_for_label }}">Nombre:</label>
+                            {% render_field form.nombre class+="form-control" %}
+                            {% for error in form.nombre.errors %}
+                                <span class="text-danger">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        <div class="form-group{% if form.apellidos.errors %} has-error{% endif %}">
+                            <label for="{{ form.apellidos.id_for_label }}">Apellidos:</label>
+                            {% render_field form.apellidos class+="form-control" %}
+                            {% for error in form.apellidos.errors %}
+                                <span class="text-danger">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        <div class="form-group{% if form.direccion.errors %} has-error{% endif %}">
+                            <label for="{{ form.direccion.id_for_label }}">Dirección:</label>
+                            {% render_field form.direccion class+="form-control" %}
+                            {% for error in form.direccion.errors %}
+                                <span class="text-danger">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        <div class="form-group{% if form.password1.errors %} has-error{% endif %}">
+                            <label for="{{ form.password1.id_for_label }}">Contraseña:</label>
+                            {% render_field form.password1 class+="form-control" type="password" %}
+                            {% for error in form.password1.errors %}
+                                <span class="text-danger">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        <div class="form-group{% if form.password2.errors %} has-error{% endif %}">
+                            <label for="{{ form.password2.id_for_label }}">Confirmar contraseña:</label>
+                            {% render_field form.password2 class+="form-control" type="password" %}
+                            {% for error in form.password2.errors %}
+                                <span class="text-danger">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Registrarse</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<h2>Registro</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Registrarse</button>
-</form>
 {% endblock %}

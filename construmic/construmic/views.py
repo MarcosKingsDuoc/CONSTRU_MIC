@@ -7,6 +7,7 @@ from django.contrib import messages
 from CarritoApp.models import Producto
 
 def index_page(request):
+
     message = request.GET.get('message', None)
     return render(request, 'index.html', {'message': message})
 
