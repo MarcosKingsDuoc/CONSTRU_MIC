@@ -30,7 +30,7 @@ urlpatterns = [
     path('', index_page, name='inicio_page'),
     path('productos/', productos_page, name='productos_page'),
     path('ofertas/', ofertas_page, name='ofertas_page'),
-    path('accounts/', include('AccountsApp.urls')),
+    path('accounts/', include('Accounts.urls')),
     path('contacto/', include('ContactoApp.urls')),
     # path('tienda/', tienda)
 ]
