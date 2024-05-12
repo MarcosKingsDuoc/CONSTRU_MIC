@@ -28,6 +28,8 @@ class CustomUser(AbstractBaseUser):
     email = models.EmailField(unique=True)
     direccion = models.CharField(max_length=255)
 
+    numero_telefono = models.CharField(max_length=15, default='')
+
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
@@ -35,7 +37,7 @@ class CustomUser(AbstractBaseUser):
     objects = CustomUserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['nombre', 'apellidos', 'direccion']
+    REQUIRED_FIELDS = ['nombre', 'apellidos', 'direccion','numero_telefono',]
 
     def __str__(self):
         return self.email
