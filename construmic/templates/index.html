@@ -15,7 +15,7 @@
     {% endif %}
     <div style="display: flex; align-items: center;">
       <img class="logo" src="{% static 'img/logo_construmic.png' %}" alt="">
-    <p>Tienda de retail dedicada al hotel desde 2024!</p>
+    <p>Tienda de retail dedicada al hogar desde 2024!</p>
     </div>
 </div>
 
@@ -29,9 +29,35 @@
 
 <div class="container mt-4">
 
+  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <a href="{% url 'productos_page' %}">
+          <img class="d-block w-100" style="width: 800px; height: 600px;" src="{% static 'img/tienda/tienda_img_1.jpg' %}" alt="First slide">
+        </a>      
+      </div>
+      <div class="carousel-item">
+        <a href="{% url 'productos_page' %}">
+          <img class="d-block w-100" style="width: 800px; height: 600px;" src="{% static 'img/tienda/tienda_img_2.jpg' %}" alt="First slide">
+        </a>      
+      </div>
+      <div class="carousel-item">
+        <a href="{% url 'productos_page' %}">
+          <img class="d-block w-100" style="width: 800px; height: 600px;" src="{% static 'img/tienda/tienda_img_3.jpg' %}" alt="First slide">
+        </a>      
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
 
-
-  <h1 style="  text-align: center;">En CONSTRU_MIC podrás encontrar esto</h1>
+  <h1 style=" padding-top: 50px; padding-bottom: 50px; text-align: center;">En CONSTRU_MIC podrás encontrar esto</h1>
     <div class="row">
       <div class="col-md-4 mb-4">
         <div class="card">

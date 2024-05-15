@@ -1,12 +1,22 @@
 {% extends 'base/base.html' %}
+{% load static %}
 {% load widget_tweaks %}
 
 {% block title %}Iniciar sesión{% endblock %}
 
-{% block header_page %}
+{% block header_page %} 
+<div class="container mt-4">
+    <h1>Iniciar sesión</h1>
+    <div style="display: flex; align-items: center; margin-bottom: 30px;">
+        <img class="logo" src="{% static 'img/logo_construmic.png' %}" alt="">
+        <a href="{% url 'registrarse_page' %}"><h5> ¿No tienes cuenta? Registrarte aquí</h5></a>
+    </div>
+</div>
 {% endblock %}
 
 {% block content %}
+
+
 
 <div class="container mt-5">
     <div class="row justify-content-center">
@@ -16,19 +26,32 @@
                 <div class="card-body">
                     <form method="post">
                         {% csrf_token %}
-                        <div class="form-group">
+
+                        <div class="form-group{% if form.username.errors %} has-error{% endif %}">
+                                
                             <label for="id_username">Correo electronico:</label>
-                            {{ form.username }}
+                            {% render_field form.username class+="form-control" oninput="this.value = this.value.toLowerCase()" %}
+                            
                             {% for error in form.username.errors %}
                                 <span class="text-danger">{{ error }}</span>
                             {% endfor %}
+                            
                         </div>
-                        <div class="form-group">
+
+                        <div class="form-group{% if form.password.errors %} has-error{% endif %}">
                             <label for="id_password">Contraseña:</label>
-                            {{ form.password }}
+
+                            <div class="input-group">
+                                {% render_field form.password class+="form-control" id="id_password" type="password" %}
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button" id="togglePassword">Mostrar/Ocultar</button>
+                                </div>
+                            </div>
+
                             {% for error in form.password.errors %}
                                 <span class="text-danger">{{ error }}</span>
                             {% endfor %}
+
                         </div>
                         <button type="submit" class="btn btn-primary">Iniciar sesión</button>
                     </form>
@@ -37,5 +60,36 @@
         </div>
     </div>
 </div>
+
+{% if messages %}
+<div  class="alert alert-success" style="margin-top: 30px;">
+    <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+
+<script>
+
+    // Función para alternar la visibilidad de la contraseña
+    function togglePassword(inputId) {
+        var input = document.getElementById(inputId);
+        if (input.type === "password") {
+            input.type = "text";
+        } else {
+            input.type = "password";
+        }
+    }
+
+    // Manejador de eventos para los botones de alternancia
+    document.getElementById("togglePassword").addEventListener("click", function() {
+        togglePassword("id_password");
+    });
+    
+</script>
+
 
 {% endblock %}

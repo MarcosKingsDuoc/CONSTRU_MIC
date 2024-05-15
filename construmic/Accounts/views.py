@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect
 from .forms import CustomUserCreationForm, CustomAuthenticationForm
 from django.contrib.auth import login, logout
+from django.contrib import messages
 
 def signup_view(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, "¡Cuenta creada exitosamente! Por favor, inicie sesión.")
             return redirect('iniciar_sesion_page')
     else:
         form = CustomUserCreationForm()

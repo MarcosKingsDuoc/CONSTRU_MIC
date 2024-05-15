@@ -1,69 +1,149 @@
 {% extends 'base/base.html' %}
+{% load static %}
 {% load widget_tweaks %}
 
 {% block title %}Registrarse{% endblock %}
 
-{% block header_page %}
+{% block header_page %} 
+<div class="container mt-4">
+    <h1>Registrarse</h1>
+    <div style="display: flex; align-items: center; margin-bottom: 30px;">
+        <img class="logo" src="{% static 'img/logo_construmic.png' %}" alt="">
+        <a href="{% url 'iniciar_sesion_page' %}"><h5> ¿Ya tienes cuenta? Iniciar sesión</h5></a>
+    </div>
+</div>
 {% endblock %}
 
 {% block content %}
 
-<div class="container mt-5">
+
+
+<div class="container mt-5" >
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="card">
+            <div class="card" style="margin-bottom: 100px;">
                 <div class="card-header">Registrarse</div>
                 <div class="card-body">
                     <form method="post">
                         {% csrf_token %}
-                        <div class="form-group{% if form.email.errors %} has-error{% endif %}">
-                            <label for="{{ form.email.id_for_label }}">Correo electrónico:</label>
-                            {% render_field form.email class+="form-control" %}
-                            {% for error in form.email.errors %}
-                                <span class="text-danger">{{ error }}</span>
-                            {% endfor %}
-                        </div>
+
                         <div class="form-group{% if form.nombre.errors %} has-error{% endif %}">
                             <label for="{{ form.nombre.id_for_label }}">Nombre:</label>
-                            {% render_field form.nombre class+="form-control" %}
+                            {% render_field form.nombre class+="form-control" oninput="this.value = this.value.toLowerCase()"%}
                             {% for error in form.nombre.errors %}
                                 <span class="text-danger">{{ error }}</span>
                             {% endfor %}
                         </div>
+
                         <div class="form-group{% if form.apellidos.errors %} has-error{% endif %}">
                             <label for="{{ form.apellidos.id_for_label }}">Apellidos:</label>
-                            {% render_field form.apellidos class+="form-control" %}
+                            {% render_field form.apellidos class+="form-control" oninput="this.value = this.value.toLowerCase()"%}
                             {% for error in form.apellidos.errors %}
                                 <span class="text-danger">{{ error }}</span>
                             {% endfor %}
                         </div>
+
+                        <div class="form-group{% if form.email.errors %} has-error{% endif %}">
+                            <label for="{{ form.email.id_for_label }}">Correo electrónico:</label>
+                            {% render_field form.email class+="form-control" oninput="this.value = this.value.toLowerCase()" %}
+                            {% for error in form.email.errors %}
+                                <span class="text-danger">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+
+                        <div class="form-group{% if form.numero_telefono.errors %} has-error{% endif %}">
+                            <label for="{{ form.numero_telefono.id_for_label }}">Número de teléfono:</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">+</span>
+                                </div>
+                                <input type="text" class="form-control" id="{{ form.numero_telefono.id_for_label }}" name="{{ form.numero_telefono.html_name }}" oninput="validarTelefono(event)" maxlength="12">
+                            </div>
+                            {% for error in form.numero_telefono.errors %}
+                            <span class="text-danger">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                                    
                         <div class="form-group{% if form.direccion.errors %} has-error{% endif %}">
                             <label for="{{ form.direccion.id_for_label }}">Dirección:</label>
-                            {% render_field form.direccion class+="form-control" %}
+                            {% render_field form.direccion class+="form-control" oninput="this.value = this.value.toLowerCase()"%}
                             {% for error in form.direccion.errors %}
                                 <span class="text-danger">{{ error }}</span>
                             {% endfor %}
                         </div>
+
                         <div class="form-group{% if form.password1.errors %} has-error{% endif %}">
                             <label for="{{ form.password1.id_for_label }}">Contraseña:</label>
-                            {% render_field form.password1 class+="form-control" type="password" %}
+                            <div class="input-group">
+                                {% render_field form.password1 class+="form-control" id="id_password1" type="password" %}
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button" id="togglePassword1">Mostrar/Ocultar</button>
+                                </div>
+                            </div>
                             {% for error in form.password1.errors %}
                                 <span class="text-danger">{{ error }}</span>
                             {% endfor %}
                         </div>
+
                         <div class="form-group{% if form.password2.errors %} has-error{% endif %}">
                             <label for="{{ form.password2.id_for_label }}">Confirmar contraseña:</label>
-                            {% render_field form.password2 class+="form-control" type="password" %}
+                            <div class="input-group">
+                                {% render_field form.password2 class+="form-control" id="id_password2" type="password" %}
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button" id="togglePassword2">Mostrar/Ocultar</button>
+                                </div>
+                            </div>
                             {% for error in form.password2.errors %}
                                 <span class="text-danger">{{ error }}</span>
                             {% endfor %}
                         </div>
+
                         <button type="submit" class="btn btn-primary">Registrarse</button>
+
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+<script>
+
+    // Función para alternar la visibilidad de la contraseña
+    function togglePassword(inputId) {
+        var input = document.getElementById(inputId);
+        if (input.type === "password") {
+            input.type = "text";
+        } else {
+            input.type = "password";
+        }
+    }
+
+    // Manejador de eventos para los botones de alternancia
+    document.getElementById("togglePassword1").addEventListener("click", function() {
+        togglePassword("id_password1");
+    });
+    document.getElementById("togglePassword2").addEventListener("click", function() {
+        togglePassword("id_password2");
+    });
+
+
+
+        function validarTelefono(event) {
+    // Obtener el evento y el valor del input
+    const input = event.target;
+    const valor = input.value;
+    
+    // Validar si el valor contiene solo números
+    const soloNumeros = /^[0-9]*$/;
+    
+    // Si el valor no contiene solo números, eliminar el último carácter ingresado
+    if (!soloNumeros.test(valor)) {
+        input.value = valor.substring(0, valor.length - 1);
+    }
+    }
+    
+</script>
 
 {% endblock %}

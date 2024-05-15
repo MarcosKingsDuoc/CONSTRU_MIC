@@ -1,5 +1,7 @@
 {% extends 'base/base.html' %}
 {% load static %}
+{% load widget_tweaks %}
+
 
 {% block title %}Contacto CONSTRU_MIC{% endblock %}
 
@@ -14,64 +16,66 @@
 {% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-    {% if messages %}
-        {% for message in messages %}
-            <div class="alert alert-{{ message.tags }}">
-                {{ message }}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Contacto</div>
+                    <div class="card-body">
+                        <form method="post">
+                            {% csrf_token %}
+                        
+                            <div class="form-group{% if form.nombre.errors %} has-error{% endif %}">
+                                <label for="{{ form.nombre.id_for_label }}">Nombre:</label>
+                                {% render_field form.nombre class+="form-control" oninput="this.value = this.value.toLowerCase()"%}
+                                {% for error in form.nombre.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        
+                            <div class="form-group{% if form.apellido.errors %} has-error{% endif %}">
+                                <label for="{{ form.nombre.id_for_label }}">Apellidos:</label>
+                                {% render_field form.apellidos class+="form-control" oninput="this.value = this.value.toLowerCase()"%}
+                                {% for error in form.apellidos.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        
+                            <div class="form-group{% if form.email.errors %} has-error{% endif %}">
+                                <label for="{{ form.email.id_for_label }}">Email:</label>
+                                {% render_field form.email class+="form-control"%}
+                                {% for error in form.email.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        
+                            <div class="form-group{% if form.apellido.errors %} has-error{% endif %}">
+                                <label for="{{ form.nombre.id_for_label }}">Mensaje:</label>
+                                {% render_field form.mensaje class+="form-control"%}
+                                {% for error in form.mensaje.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+                    </div>
+                </div>
             </div>
-        {% endfor %}
-    {% endif %}
-    <div class="card">
-        <div class="card-body">
-            <form id="contactForm" method="post" action="{% url 'contacto_page' %}">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label for="nameInput">Nombre y apellidos</label>
-                    <input type="text" class="form-control" id="nameInput" name="nombres" placeholder="Nombre y apellidos" required>
-                </div>
-                <div class="form-group">
-                    <label for="EmailInput">Correo electrónico</label>
-                    <input type="email" class="form-control" id="EmailInput" name="correo" placeholder="Ingrese su correo electrónico" required>
-                    <div id="emailError" class="invalid-feedback"></div>
-                </div>
-                <div class="form-group">
-                    <label for="MensajeInput">Mensaje</label>
-                    <textarea class="form-control" id="MensajeInput" name="mensaje" rows="4" placeholder="Ingrese su mensaje" required></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Enviar mensaje</button>
-            </form>
         </div>
     </div>
+
+</form>
+
+{% if messages %}
+<div  class="alert alert-success" style="margin-top: 30px;">
+    <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
 </div>
-<script>
-    document.getElementById("contactForm").addEventListener("submit", function(event) {
-        var nombres = document.getElementById("nameInput").value.trim();
-        var correo = document.getElementById("EmailInput").value.trim();
-        var mensaje = document.getElementById("MensajeInput").value.trim();
+{% endif %}
 
-        // Validar que los campos no estén vacíos
-        if (nombres === '' || correo === '' || mensaje === '') {
-            alert("Por favor, complete todos los campos.");
-            event.preventDefault();
-            return;
-        }
-
-        // Validar la sintaxis del correo electrónico
-        var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailPattern.test(correo)) {
-            document.getElementById("emailError").innerText = "El formato del correo electrónico no es válido.";
-            event.preventDefault();
-            return;
-        }
-
-        // Validar la longitud del mensaje
-        if (mensaje.length > 2000) {
-            alert("El mensaje no puede exceder los 2000 caracteres.");
-            event.preventDefault();
-            return;
-        }
-    });
-</script>
 {% endblock %}
 
