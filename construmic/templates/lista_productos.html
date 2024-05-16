@@ -9,6 +9,9 @@
         {% for producto in productos %}
         <li>
             <a href="{% url 'detalle_producto' producto.id %}">{{ producto.nombre }}</a> - ${{ producto.precio }}
+            {% if producto.imagen %}
+                <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" width="100">
+            {% endif %}
             <form action="{% url 'agregar_al_carrito' producto.id %}" method="post">
                 {% csrf_token %}
                 <button type="submit">Agregar al carrito</button>
