@@ -27,9 +27,10 @@ from .views import (
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index_page, name='inicio_page'),
-    path('productos/', productos_page, name='productos_page'),
+    path('xd/', productos_page, name='productos_page'),
     path('ofertas/', ofertas_page, name='ofertas_page'),
     path('accounts/', include('Accounts.urls')),
     path('contacto/', include('ContactoApp.urls')),
+    path('productos/', include('shop.urls')),
 
 ]
