@@ -23,7 +23,6 @@ from .views import (
     productos_page,
     ofertas_page,)
 
-# from CarritoApp.views import tienda
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,5 +31,5 @@ urlpatterns = [
     path('ofertas/', ofertas_page, name='ofertas_page'),
     path('accounts/', include('Accounts.urls')),
     path('contacto/', include('ContactoApp.urls')),
-    # path('tienda/', tienda)
+
 ]
