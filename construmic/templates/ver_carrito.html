@@ -11,5 +11,9 @@
         {% endfor %}
     </ul>
     <p>Total: ${{ total }}</p>
+    <form action="{% url 'comprar' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Comprar</button>
+    </form>
 </body>
 </html>
