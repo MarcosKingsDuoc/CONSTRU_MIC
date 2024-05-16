@@ -18,13 +18,18 @@ def agregar_al_carrito(request, producto_id):
     carrito, creado = Carrito.objects.get_or_create(usuario=request.user)
     carrito_producto, creado = CarritoProducto.objects.get_or_create(carrito=carrito, producto=producto)
     
-    if carrito_producto.cantidad >= producto.stock:
-        messages.error(request, f'No hay suficiente stock para {producto.nombre}.')
+    if not creado:
+        if carrito_producto.cantidad < producto.stock:
+            carrito_producto.cantidad += 1
+            carrito_producto.save()
+        else:
+            messages.error(request, f'No hay suficiente stock para {producto.nombre}.')
     else:
-        carrito_producto.cantidad += 1
+        carrito_producto.cantidad = 1
         carrito_producto.save()
     
     return redirect('carrito')
+
 
 @login_required
 def ver_carrito(request):
