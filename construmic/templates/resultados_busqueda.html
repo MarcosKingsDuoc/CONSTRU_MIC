@@ -6,10 +6,10 @@
 {% block header_page %} 
 
 <div class="container mt-4">
-    <h1>Nuestros productos</h1>
+    <h1>Resultados de búsqueda:</h1>
     <div style="display: flex; align-items: center;">
       <img class="logo" src="{% static 'img/logo_construmic.png' %}" alt="">
-        <p>¿Buscas algo para tu hogar? ¡Seguramente aquí lo encontrarás!</p>
+        <strong>Resultados de Búsqueda para "{{ query }}":</strong>
     </div>
 </div>
 
@@ -27,9 +27,7 @@
 </ul>
 {% endif %}
 
-
-
-
+{% if productos %}
 <div class="container">
     <div class="row">
         {% for producto in productos %}
@@ -46,7 +44,7 @@
 
                     <form action="{% url 'agregar_al_carrito' producto.id %}" method="post">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-primary" {% if producto.stock == 0 %}disabled{% endif %}>Agregar al carrito</button>
+                        <button type="submit" {% if producto.stock == 0 %}disabled{% endif %}>Agregar al carrito</button>
                     </form>
                 </div>
             </div>
@@ -54,7 +52,8 @@
         {% endfor %}
     </div>
 </div>
-
-
+{% else %}
+<p>No se encontraron productos que coincidan con tu búsqueda.</p>
+{% endif %}
 
 {% endblock %}

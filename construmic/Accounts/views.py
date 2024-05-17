@@ -20,7 +20,7 @@ def login_view(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('inicio_page')  # Cambia 'home' por la URL a la que quieres redirigir después del inicio de sesión
+            return redirect('inicio_page')
     else:
         form = CustomAuthenticationForm()
     return render(request, 'iniciar-sesion.html', {'form': form})

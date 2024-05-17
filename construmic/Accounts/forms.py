@@ -8,6 +8,9 @@ class CustomUserCreationForm(UserCreationForm):
         fields = ['nombre', 'apellidos', 'email', 'direccion', 'numero_telefono']
 
 class CustomAuthenticationForm(AuthenticationForm):
-    class Meta:
-        model = CustomUser
-        fields = ['email', 'password']
+    def confirm_login_allowed(self, user):
+        if not user.is_active:
+            raise forms.ValidationError(
+                "Esta cuenta está inactiva.",
+                code='inactive',
+            )
