@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 
 
 
-from CarritoApp.models import Producto
+
 
 def index_page(request):
 
@@ -13,8 +13,8 @@ def index_page(request):
 
 
 def productos_page(request):
-    producutos = Producto.objects.all()
-    return render(request, 'productos.html', {'productos':producutos})
+
+    return render(request, 'productos.html', )
 
 def ofertas_page(request):
     return render(request, 'ofertas.html')
