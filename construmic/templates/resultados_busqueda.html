@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resultados de Búsqueda</title>
+</head>
+<body>
+    <h1>Resultados de Búsqueda para "{{ query }}"</h1>
+    {% if productos %}
+        <ul>
+            {% for producto in productos %}
+            <li>
+                <a href="{% url 'detalle_producto' producto.id %}">{{ producto.nombre }}</a> - ${{ producto.precio }}
+                {% if producto.imagen %}
+                    <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" width="100">
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No se encontraron productos que coincidan con tu búsqueda.</p>
+    {% endif %}
+</body>
+</html>

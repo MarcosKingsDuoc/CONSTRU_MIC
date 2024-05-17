@@ -15,6 +15,11 @@ def detalle_producto(request, producto_id):
 @login_required
 def agregar_al_carrito(request, producto_id):
     producto = get_object_or_404(Producto, id=producto_id)
+    
+    if producto.stock == 0:
+        messages.error(request, f'El producto {producto.nombre} está agotado.')
+        return redirect('lista_productos')
+    
     carrito, creado = Carrito.objects.get_or_create(usuario=request.user)
     carrito_producto, creado = CarritoProducto.objects.get_or_create(carrito=carrito, producto=producto)
     
@@ -29,6 +34,7 @@ def agregar_al_carrito(request, producto_id):
         carrito_producto.save()
     
     return redirect('carrito')
+
 
 
 @login_required
@@ -50,15 +56,24 @@ def comprar(request):
     pedido = Pedido.objects.create(usuario=request.user, total=total, fecha=timezone.now())
     
     for item in productos_en_carrito:
-        PedidoProducto.objects.create(
-            pedido=pedido,
-            producto=item.producto,
-            cantidad=item.cantidad,
-            precio=item.producto.precio
-        )
+        # Verificar que hay suficiente stock
+        if item.producto.stock >= item.cantidad:
+            PedidoProducto.objects.create(
+                pedido=pedido,
+                producto=item.producto,
+                cantidad=item.cantidad,
+                precio=item.producto.precio
+            )
+            # Restar la cantidad comprada del stock
+            item.producto.stock -= item.cantidad
+            item.producto.save()
+        else:
+            messages.error(request, f'No hay suficiente stock para {item.producto.nombre}.')
+            return redirect('carrito')
     
     productos_en_carrito.delete()
     return render(request, 'compra_exitosa.html', {'pedido': pedido})
+
 
 @login_required
 def eliminar_del_carrito(request, producto_id):
@@ -113,3 +128,9 @@ def admin_agregar_producto(request):
 
 def error_403(request, exception=None):
     return render(request, 'error_403.html', status=403)
+
+
+def buscar_productos(request):
+    query = request.GET.get('q')
+    productos = Producto.objects.filter(nombre__icontains=query) | Producto.objects.filter(descripcion__icontains=query)
+    return render(request, 'resultados_busqueda.html', {'productos': productos, 'query': query})

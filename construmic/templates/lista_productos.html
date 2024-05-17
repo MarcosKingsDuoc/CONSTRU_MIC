@@ -5,6 +5,13 @@
 </head>
 <body>
     <h1>Lista de Productos</h1>
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
     <ul>
         {% for producto in productos %}
         <li>
@@ -14,7 +21,7 @@
             {% endif %}
             <form action="{% url 'agregar_al_carrito' producto.id %}" method="post">
                 {% csrf_token %}
-                <button type="submit">Agregar al carrito</button>
+                <button type="submit" {% if producto.stock == 0 %}disabled{% endif %}>Agregar al carrito</button>
             </form>
         </li>
         {% endfor %}
