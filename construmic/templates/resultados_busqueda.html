@@ -1,23 +1,59 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Resultados de Búsqueda</title>
-</head>
-<body>
-    <h1>Resultados de Búsqueda para "{{ query }}"</h1>
-    {% if productos %}
-        <ul>
-            {% for producto in productos %}
-            <li>
-                <a href="{% url 'detalle_producto' producto.id %}">{{ producto.nombre }}</a> - ${{ producto.precio }}
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}Lista de productos{% endblock %}
+
+{% block header_page %} 
+
+<div class="container mt-4">
+    <h1>Resultados de búsqueda:</h1>
+    <div style="display: flex; align-items: center;">
+      <img class="logo" src="{% static 'img/logo_construmic.png' %}" alt="">
+        <strong>Resultados de Búsqueda para "{{ query }}":</strong>
+    </div>
+</div>
+
+{% endblock %}
+
+
+{% block content %}
+
+
+{% if messages %}
+<ul>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+{% if productos %}
+<div class="container">
+    <div class="row">
+        {% for producto in productos %}
+        <div class="col-md-4">
+            <div class="card mb-4" style="width: 100%;">
                 {% if producto.imagen %}
-                    <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" width="100">
+                <img class="card-img-top" src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+                {% else %}
+                <img class="card-img-top" src="{% static 'img/producto_no_encontrado.jpg' %}" alt="producto sin imagen">
                 {% endif %}
-            </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No se encontraron productos que coincidan con tu búsqueda.</p>
-    {% endif %}
-</body>
-</html>
+                <div class="card-body">
+                    <h5 class="card-title"><a href="{% url 'detalle_producto' producto.id %}">{{ producto.nombre }}</a></h5>
+                    <p class="card-text"> ${{ producto.precio }}</p>
+
+                    <form action="{% url 'agregar_al_carrito' producto.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" {% if producto.stock == 0 %}disabled{% endif %}>Agregar al carrito</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% else %}
+<p>No se encontraron productos que coincidan con tu búsqueda.</p>
+{% endif %}
+
+{% endblock %}
