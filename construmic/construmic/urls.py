@@ -19,16 +19,12 @@ from django.urls import path, include
 
 
 from .views import (
-    index_page, 
-    productos_page,
-    ofertas_page,)
+    index_page)
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index_page, name='inicio_page'),
-    path('xd/', productos_page, name='productos_page'),
-    path('ofertas/', ofertas_page, name='ofertas_page'),
     path('accounts/', include('Accounts.urls')),
     path('contacto/', include('ContactoApp.urls')),
     path('productos/', include('shop.urls')),
