@@ -1,24 +1,51 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Agregar Producto</title>
-</head>
-<body>
+{% extends 'base/admin_base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}Bienvenido/a a CONSTRU_MIC{% endblock %}
+
+
+{% block header_page %} 
+
+<div class="container mt-4">
     <h1>Agregar Producto</h1>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
+</div>
+
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
         <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" required><br><br>
+        <input type="text" id="nombre" name="nombre" class="form-control" required>
+    </div>
+    <div class="form-group">
         <label for="descripcion">Descripción:</label>
-        <textarea id="descripcion" name="descripcion" required></textarea><br><br>
+        <textarea id="descripcion" name="descripcion" class="form-control" required></textarea>
+    </div>
+    <div class="form-group">
         <label for="precio">Precio:</label>
-        <input type="number" step="0.01" id="precio" name="precio" required><br><br>
+        <input type="number" step="0.01" id="precio" name="precio" class="form-control" required>
+    </div>
+    <div class="form-group">
         <label for="stock">Stock:</label>
-        <input type="number" id="stock" name="stock" required><br><br>
+        <input type="number" id="stock" name="stock" class="form-control" required>
+    </div>
+    <div class="form-group">
         <label for="imagen">Imagen:</label>
-        <input type="file" id="imagen" name="imagen"><br><br>
-        <button type="submit">Agregar Producto</button>
-    </form>
-    <a href="{% url 'admin_historial_compras' %}">Volver al Historial de Compras</a>
-</body>
-</html>
+        <input type="file" id="imagen" name="imagen" class="form-control-file">
+    </div>
+    <button type="submit" class="btn btn-primary">Agregar Producto</button>
+</form>
+
+<a href="{% url 'admin_historial_compras' %}" class="btn btn-secondary mt-3">Volver al Historial de Compras</a>
+
+
+{% endblock %}
+
+

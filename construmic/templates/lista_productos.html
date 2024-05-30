@@ -30,30 +30,43 @@
 
 
 
-<div class="container">
+<div class="container mt-4">
     <div class="row">
-        {% for producto in productos %}
-        <div class="col-md-4">
-            <div class="card mb-4" style="width: 100%;">
-                {% if producto.imagen %}
-                <img class="card-img-top" src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
-                {% else %}
-                <img class="card-img-top" src="{% static 'img/producto_no_encontrado.jpg' %}" alt="producto sin imagen">
-                {% endif %}
-                <div class="card-body">
-                    <h5 class="card-title"><a href="{% url 'detalle_producto' producto.id %}">{{ producto.nombre }}</a></h5>
-                    <p class="card-text"> ${{ producto.precio }}</p>
-
-                    <form action="{% url 'agregar_al_carrito' producto.id %}" method="post">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-primary" {% if producto.stock == 0 %}disabled{% endif %}>Agregar al carrito</button>
-                    </form>
+        {% if productos %}
+            {% for producto in productos %}
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm" style="width: 100%;">
+                        {% if producto.imagen %}
+                            <img class="card-img-top" src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+                        {% else %}
+                            <img class="card-img-top" src="{% static 'img/producto_no_encontrado.jpg' %}" alt="producto sin imagen">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="{% url 'detalle_producto' producto.id %}">{{ producto.nombre }}</a>
+                            </h5>
+                            <p class="card-text">${{ producto.precio }}</p>
+                            <form action="{% url 'agregar_al_carrito' producto.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-primary btn-block" {% if producto.stock == 0 %}disabled{% endif %}>Agregar al carrito</button>
+                            </form>
+                            {% if producto.stock == 0 %}
+                                <span class="badge badge-danger mt-2">Sin Stock</span>
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-12 text-center">
+                <h1 class="display-4">En estos momentos no se encuentran productos disponibles</h1>
+                <p class="lead">Por favor intente más tarde.</p>
+                <img src="{% static 'img/sad_cat.jpg' %}" alt="No hay productos" class="img-fluid mt-4" style="max-width: 400px;">
             </div>
-        </div>
-        {% endfor %}
+        {% endif %}
     </div>
 </div>
+
 
 
 

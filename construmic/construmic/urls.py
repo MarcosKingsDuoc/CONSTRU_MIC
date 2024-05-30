@@ -19,7 +19,8 @@ from django.urls import path, include
 
 
 from .views import (
-    index_page)
+    index_page,
+    sobre_nosotros_page)
 
 
 urlpatterns = [
@@ -28,5 +29,5 @@ urlpatterns = [
     path('accounts/', include('Accounts.urls')),
     path('contacto/', include('ContactoApp.urls')),
     path('productos/', include('shop.urls')),
-
+    path('sobre_nosotros/', sobre_nosotros_page, name='sobre_nosotros')
 ]
