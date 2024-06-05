@@ -109,7 +109,7 @@ def cambiar_cantidad_producto(request, producto_id, operacion):
 @login_required
 def admin_historial_compras(request):
     pedidos = Pedido.objects.all().order_by('-fecha')
-    return render(request, 'admin_historial_compras.html', {'pedidos': pedidos})
+    return render(request, 'admin/admin_historial_compras.html', {'pedidos': pedidos})
 
 @user_passes_test(lambda u: u.is_staff)
 @login_required
@@ -124,7 +124,13 @@ def admin_agregar_producto(request):
         Producto.objects.create(nombre=nombre, descripcion=descripcion, precio=precio, stock=stock, imagen=imagen)
         return redirect('admin_historial_compras')
     
-    return render(request, 'admin_agregar_producto.html')
+    return render(request, 'admin/admin_agregar_producto.html')
+
+@user_passes_test(lambda u: u.is_staff)
+@login_required
+def admin_panel(request):    
+    return render(request, 'admin/panel_administracion.html')
+
 
 def error_403(request, exception=None):
     return render(request, 'error_403.html', status=403)

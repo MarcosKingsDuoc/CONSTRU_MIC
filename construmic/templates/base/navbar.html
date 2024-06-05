@@ -14,7 +14,7 @@
                     <a class="nav-link" href="{% url 'lista_productos' %}">Productos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="">Ofertas</a>
+                    <a class="nav-link" href="{% url 'sobre_nosotros' %}">Sobre nosotros</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'contacto_page' %}">Contacto</a>
@@ -29,6 +29,11 @@
             </a>
             {% if user.is_authenticated %}
             <ul class="navbar-nav ml-auto">
+                {% if user.is_staff %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'admin_panel' %}" style="color: white;">Administración</a>
+                </li>
+                {% endif %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'cerrar_sesion_page' %}">Cerrar sesión</a>
                 </li>
