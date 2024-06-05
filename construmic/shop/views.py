@@ -132,6 +132,34 @@ def admin_panel(request):
     return render(request, 'admin/panel_administracion.html')
 
 
+@user_passes_test(lambda u: u.is_staff) # editar productos como admin
+@login_required
+def admin_editar_producto(request, producto_id):
+    producto = get_object_or_404(Producto, id=producto_id)
+    if request.method == 'POST':
+        producto.nombre = request.POST.get('nombre')
+        producto.descripcion = request.POST.get('descripcion')
+        producto.precio = request.POST.get('precio')
+        producto.stock = request.POST.get('stock')
+        if request.FILES.get('imagen'):
+            producto.imagen = request.FILES.get('imagen')
+        producto.save()
+        return redirect('admin_historial_compras')
+    
+    return render(request, 'admin/admin_editar_producto.html', {'producto': producto})
+
+@user_passes_test(lambda u: u.is_staff) # eliminar productos admin
+@login_required
+def admin_eliminar_producto(request, producto_id):
+    producto = get_object_or_404(Producto, id=producto_id)
+    if request.method == 'POST':
+        producto.delete()
+        return redirect('admin_historial_compras')
+    
+    return render(request, 'admin/admin_eliminar_producto.html', {'producto': producto})
+
+
+
 def error_403(request, exception=None):
     return render(request, 'error_403.html', status=403)
 
