@@ -13,6 +13,7 @@ urlpatterns = [
     path('cambiar_cantidad/<int:producto_id>/<str:operacion>/', views.cambiar_cantidad_producto, name='cambiar_cantidad_producto'),
     path('admin/historial/', views.admin_historial_compras, name='admin_historial_compras'),
     path('admin/agregar_producto/', views.admin_agregar_producto, name='admin_agregar_producto'),
+    path('admin/panel_administracion/', views.admin_panel, name='admin_panel'),
     path('buscar/', views.buscar_productos, name='buscar_productos'),
 ]
 
@@ -20,3 +21,4 @@ handler403 = 'shop.views.error_403'
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

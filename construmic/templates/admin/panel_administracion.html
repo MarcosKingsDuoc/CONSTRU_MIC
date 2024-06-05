@@ -1,0 +1,45 @@
+{% extends 'base/admin_base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}Panel Administrativo{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h1>Panel Administrativo</h1>
+            <p>Bienvenido al panel administrativo. Aquí puedes gestionar productos y ver el historial de compras.</p>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Historial de Compras</h5>
+                    <p class="card-text">Revisa el historial de compras de los usuarios.</p>
+                    <a href="{% url 'admin_historial_compras' %}" class="btn btn-primary">Ver Historial</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Agregar Producto</h5>
+                    <p class="card-text">Añade nuevos productos al catálogo.</p>
+                    <a href="{% url 'admin_agregar_producto' %}" class="btn btn-success">Agregar Producto</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Salir del panel</h5>
+                    <p class="card-text">Regresar al modo de usuario.</p>
+                    <a href="{% url 'admin_panel' %}" class="btn btn-warning">Ir al Panel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

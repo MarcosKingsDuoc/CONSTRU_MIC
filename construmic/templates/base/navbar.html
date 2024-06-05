@@ -29,14 +29,14 @@
             </a>
             {% if user.is_authenticated %}
             <ul class="navbar-nav ml-auto">
+                {% if user.is_staff %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'admin_panel' %}" style="color: white;">Administración</a>
+                </li>
+                {% endif %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'cerrar_sesion_page' %}">Cerrar sesión</a>
                 </li>
-                {% if user.is_staff %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'admin_agregar_producto' %}" style="color: white;">Administración</a>
-                </li>
-                {% endif %}
             </ul>
             {% else %}
             <ul class="navbar-nav ml-auto">
