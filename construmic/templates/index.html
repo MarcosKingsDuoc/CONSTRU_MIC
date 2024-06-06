@@ -5,18 +5,18 @@
 
 
 
-{% block header_page %} 
+{% block header_page %}
 
 <div class="container mt-4">
-    {% if user.is_authenticated %}
-    <h1>Bienvenido a CONSTRU_MIC, {{ user.nombre }} {{ user.apellidos }}</h1>
-    {% else %}
-    <h1>Bienvenido a CONSTRU_MIC</h1>
-    {% endif %}
-    <div style="display: flex; align-items: center;">
-      <img class="logo" src="{% static 'img/logo_construmic.png' %}" alt="">
+  {% if user.is_authenticated %}
+  <h1>Bienvenido a CONSTRU_MIC, {{ user.nombre }} {{ user.apellidos }}</h1>
+  {% else %}
+  <h1>Bienvenido a CONSTRU_MIC</h1>
+  {% endif %}
+  <div style="display: flex; align-items: center;">
+    <img class="logo" src="{% static 'img/logo_construmic.png' %}" alt="">
     <p>Tienda de retail dedicada al hogar desde 2024!</p>
-    </div>
+  </div>
 </div>
 
 
@@ -33,18 +33,21 @@
     <div class="carousel-inner">
       <div class="carousel-item active">
         <a href="{% url 'lista_productos' %}">
-          <img class="d-block w-100" style="width: 800px; height: 600px;" src="{% static 'img/tienda/tienda_img_1.jpg' %}" alt="First slide">
-        </a>      
+          <img class="d-block w-100" style="width: 800px; height: 600px;"
+            src="{% static 'img/tienda/tienda_img_1.jpg' %}" alt="First slide">
+        </a>
       </div>
       <div class="carousel-item">
         <a href="{% url 'lista_productos' %}">
-          <img class="d-block w-100" style="width: 800px; height: 600px;" src="{% static 'img/tienda/tienda_img_2.jpg' %}" alt="First slide">
-        </a>      
+          <img class="d-block w-100" style="width: 800px; height: 600px;"
+            src="{% static 'img/tienda/tienda_img_2.jpg' %}" alt="First slide">
+        </a>
       </div>
       <div class="carousel-item">
         <a href="{% url 'lista_productos' %}">
-          <img class="d-block w-100" style="width: 800px; height: 600px;" src="{% static 'img/tienda/tienda_img_3.jpg' %}" alt="First slide">
-        </a>      
+          <img class="d-block w-100" style="width: 800px; height: 600px;"
+            src="{% static 'img/tienda/tienda_img_3.jpg' %}" alt="First slide">
+        </a>
       </div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -57,64 +60,60 @@
     </a>
   </div>
 
-  <h1 style=" padding-top: 50px; padding-bottom: 50px; text-align: center;">En CONSTRU_MIC podrás encontrar esto</h1>
-    <div class="row">
-      <div class="col-md-4 mb-4">
-        <div class="card">
-          <img src="https://picsum.photos/300" class="card-img-top square-img" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Producto 1</h5>
-            <p class="card-text">Descripción breve del producto 1.</p>
-            <a href="#" class="btn btn-primary">Ver detalles</a>
-          </div>
+  <div class="container mt-4">
+    <div class="row" style="margin-top: 30px;">
+        <div class="col-md-6">
+            <div class="card">
+                <img src="{% static 'img/tienda/waifu_taladro.jpg' %}" class="card-img-top img-fluid" alt="...">
+                <div class="card-body">
+                    <p class="card-text text-center">Imagen solo referencial :)</p>
+                </div>
+            </div>
         </div>
-      </div>
-      
-      <div class="col-md-4 mb-4">
-        <div class="card">
-          <img src="https://picsum.photos/300" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Producto 2</h5>
-            <p class="card-text">Descripción breve del producto 2.</p>
-            <a href="#" class="btn btn-primary">Ver detalles</a>
-          </div>
+        <div class="col-md-6 d-flex align-items-center">
+            <div>
+                <h2>¿Buscas herramientas?</h2>
+                <p>En CONSTRU_MIC no solo vendemos objetos para el hogar, también contamos con un gran apartado de herramientas que pueden servirte!</p>
+                <button type="button" class="btn btn-primary" disabled>Llévame ahí!</button>
+            </div>
         </div>
-      </div>
-      <div class="col-md-4 mb-4">
-        <div class="card">
-          <img src="https://picsum.photos/300" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Producto 3</h5>
-            <p class="card-text">Descripción breve del producto 3.</p>
-            <a href="#" class="btn btn-primary">Ver detalles</a>
-          </div>
-        </div>
-      </div>
     </div>
 
-    <div class="container" style="display: flex;">
-
-      <div style="flex: 1;">
-        <div class="row mt-4">
-          <div class="col-md-6">
-            <h2>¿Buscas objetos de decoración?</h2>
-            <p>En nuestra tienda no solo encontrarás productos increíbles, sino también referencias para decorar tu hogar como un profesional. ¡No te pierdas nuestras publicaciones!</p>
-            <button type="button" class="btn btn-primary" disabled>Vamos allá</button>
-          </div>
+    <div class="row" style="margin-top: 30px; flex-direction: row-reverse;">
+        <div class="col-md-6">
+            <div class="card">
+                <img src="{% static 'img/tienda/muebles.jpg' %}" class="card-img-top img-fluid" alt="...">
+                <div class="card-body">
+                    <p class="card-text">¡Ven y descubre tu nuevo mueble favorito hoy!</p>
+                </div>
+            </div>
         </div>
-      </div>
-    
-      <div style="flex: 1;">
-        <img src="https://picsum.photos/300" width="300" height="300" alt="...">
-        <p>imagen solo referencial.</p>
-      </div>
-    
+        <div class="col-md-6 d-flex align-items-center">
+            <div>
+                <h2>Encuentra los Muebles Perfectos para tu Hogar</h2>
+                <p>En CONSTRU_MIC, ofrecemos una amplia gama de muebles de alta calidad para cada rincón de tu hogar. Transforma tu espacio con nuestras piezas diseñadas para combinar estilo y comodidad.</p>
+                <button type="button" class="btn btn-primary" disabled>Llévame ahí!</button>
+            </div>
+        </div>
     </div>
-    
 
+    <div class="row" style="margin-top: 30px;">
+        <div class="col-md-6">
+            <div class="card">
+                <img src="{% static 'img/tienda/others.jpg' %}" class="card-img-top img-fluid" alt="...">
+                <div class="card-body">
+                    <p class="card-text text-center">El que busca, encuentra</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 d-flex align-items-center">
+            <div>
+                <h2>Siempre habrá algo más</h2>
+                <p>También solemos vender productos de otros tipos, si es que estás interesado!</p>
+                <button type="button" class="btn btn-primary" disabled>Llévame ahí!</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-  </div>
-
-{% endblock %}
-
-
+  {% endblock %}
