@@ -1,0 +1,128 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}Lista de productos{% endblock %}
+
+{% block header_page %} 
+<div class="container mt-4">
+    <h1>Productos</h1>
+    <div style="display: flex; align-items: center;">
+        <img class="logo" src="{% static 'img/logo_construmic.png' %}" alt="">
+        <p>¿Buscas algo para tu hogar? ¡Seguramente aquí lo encontrarás!</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    {% for producto in productos %}
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="{{ producto.imagen_url }}" alt="Imagen de {{ producto.nombre }}">
+        <div class="card-body">
+            <h5 class="card-title">{{ producto.nombre }}</h5>
+            <p class="card-text">${{ producto.precio }}</p>
+            <p class="card-text">Categoría: {{ producto.categoria }}</p>
+            <p class="card-text">Dimensiones: {{ producto.alto }} x {{ producto.largo }} x {{ producto.ancho }} cm</p>
+            <p class="card-text">Peso: {{ producto.peso }} kg</p>
+            <p class="card-text">Descripción: {{ producto.descripcion }}</p>
+            <p class="card-text">Estado del producto: {{ producto.get_estado_display }}</p>
+            <a href="#" class="btn btn-primary add-to-cart" data-producto-id="{{ producto.id }}">Comprar</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Constru_mic - Listado de Productos</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: rgb(255, 255, 255);
+        }
+        img {
+            max-width: 100px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Listado de Productos</h1>
+    <table> UN 50% DE OFERTA EN OFERTAS EN UN CIBER 
+        <tr>
+            <th>Imagen</th>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th></th>
+        </tr>
+        <tr>
+            <td><img src="https://easycl.vtexassets.com/arquivos/ids/188438-800-auto?width=800&height=auto&aspect=true" alt="tornillitos"></td>
+            <td>Tornillitos</td>
+            <td>$1.500</td>
+            <td><a href="#" class="add-to-cart" data-producto-id="1">Agregar al carrito</a></td>
+        </tr>
+        <tr>
+            <td><img src="https://construmartcl.vtexassets.com/arquivos/ids/211179-800-auto?v=638453462804230000&width=800&height=auto&aspect=true" alt="madera"></td>
+            <td>Madera 1" x 4"</td>
+            <td>$12.000</td>
+            <td><a href="#" class="add-to-cart" data-producto-id="2">Agregar al carrito</a></td>
+        </tr>
+        <tr>
+          <td><img src= https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJK9YLnIfz2wKJT__HOmZ7MYClSpOCLzF57Q&s alt="madera"></td>
+          <td>rtx 4060</td>
+          <td>$1 riñon bueno</td>
+          <td><a href="#" class="add-to-cart" data-producto-id="2">Agregar al carrito</a></td>
+        </tr>
+        <tr>
+          <td><img src= https://images.squarespace-cdn.com/content/v1/61c2308d4d62147d4f600ace/1676918728798-0H8FKC0F3CT1GQYHI67Q/20230214_110936.jpg?format=1000w alt="madera"></td>
+          <td>martillo </td>
+          <td>$30.990</td>
+          <td><a href="#" class="add-to-cart" data-producto-id="2">Agregar al carrito</a></td>
+        </tr>
+        <tr>
+          <td><img src= https://dojiw2m9tvv09.cloudfront.net/4287/product/destornillador-bahco-0071387.jpg alt="madera"></td>
+          <td>destornillador-bahco-0071387 </td>
+          <td>$2.390</td>
+          <td><a href="#" class="add-to-cart" data-producto-id="2">Agregar al carrito</a></td>
+        </tr>
+        <tr>
+          <td><img src=  https://cdnx.jumpseller.com/my-toolbox-chile/image/45696618/1-de762af9-6d49-4ab7-9083-63a4e00a191e.jpg?1708457491 alt="madera"></td>
+          <td>soldadora </td>
+          <td>$600.000</td>
+          <td><a href="#" class="add-to-cart" data-producto-id="2">Agregar al carrito</a></td>
+        </tr>
+        
+    </table>
+    <script>
+        document.querySelectorAll('.add-to-cart').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const productoId = this.getAttribute('data-producto-id');
+                agregarAlCarrito(productoId);
+            });
+        });
+
+        function agregarAlCarrito(productoId) {
+            console.log(`Producto agregado: ${productoId}`);
+            fetch(`/agregar-al-carrito/${productoId}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data.message);
+                });
+        }
+    </script>
+</body>
+</html>
+{% endblock %}
