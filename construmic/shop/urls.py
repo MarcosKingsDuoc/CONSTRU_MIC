@@ -15,6 +15,10 @@ urlpatterns = [
     path('admin/agregar_producto/', views.admin_agregar_producto, name='admin_agregar_producto'),
     path('admin/panel_administracion/', views.admin_panel, name='admin_panel'),
     path('buscar/', views.buscar_productos, name='buscar_productos'),
+    path('admin/editar_producto/<int:producto_id>/', views.admin_editar_producto, name='admin_editar_producto'),
+    path('admin/eliminar_producto/<int:producto_id>/', views.admin_eliminar_producto, name='admin_eliminar_producto'),
+
+
 ]
 
 handler403 = 'shop.views.error_403'

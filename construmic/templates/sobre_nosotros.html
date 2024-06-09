@@ -6,40 +6,38 @@
 {% block header_page %}
 <div class="container mt-4">
     <h1 class="mb-4">Sobre Nosotros</h1>
-    <div style="display: flex; align-items: center;">
+    <div class="d-flex align-items-center">
         <img class="logo mr-3" src="{% static 'img/logo_construmic.png' %}" alt="Logo de CONSTRU_MIC" style="width: 100px; height: auto;">
         <p>En CONSTRU_MIC, estamos dedicados a ofrecer las mejores soluciones para tu hogar, impulsados por la pasión y el compromiso de nuestro talentoso equipo. Conoce más sobre nosotros y descubre cómo podemos ayudarte a encontrar justo lo que necesitas.</p>
     </div>
 </div>
 {% endblock %}
 
-
-
 {% block content %}
 <div class="container mt-5">
-    <h1 class="mb-4">Sobre Nosotros</h1>
-    <div class="row">
+    <h2 class="mb-4 text-center">Nuestro Equipo</h2>
+    <div class="row justify-content-center">
         <!-- Marcos -->
         <div class="col-md-3">
             <div class="card mb-4 shadow-sm animate-card">
                 <div class="card-img-wrapper">
                     <img src="{% static 'img/colaboradores/marcos.png' %}" class="card-img-top" alt="Marcos">
                 </div>
-                <div class="card-body">
+                <div class="card-body text-center">
                     <h5 class="card-title">Marcos Reyes</h5>
                     <p class="card-text">Desarrollador apasionado de aplicaciones web y móviles. Estudiante de informática, amante de GNU/Linux y creador del proyecto. Marcos ha desarrollado varias aplicaciones en Django y Node.js.</p>
                 </div>
             </div>
         </div>
-        <!-- Colaborador 1 -->
+        <!-- Felipe -->
         <div class="col-md-3">
             <div class="card mb-4 shadow-sm animate-card">
                 <div class="card-img-wrapper">
-                    <img src="{% static 'img/colaboradores/No-Image-Placeholder.png' %}" class="card-img-top" alt="Colaborador 1">
+                    <img src="{% static 'img/colaboradores/aaaa.jpg' %}" class="card-img-top" alt="Felipe">
                 </div>
-                <div class="card-body">
-                    <h5 class="card-title">Colaborador 1</h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque imperdiet consectetur dolor in elementum.</p>
+                <div class="card-body text-center">
+                    <h5 class="card-title">Felipe Quintul</h5>
+                    <p class="card-text">El futuro es ahora, y ese futuro soy yo...</p>
                 </div>
             </div>
         </div>
@@ -49,7 +47,7 @@
                 <div class="card-img-wrapper">
                     <img src="{% static 'img/colaboradores/No-Image-Placeholder.png' %}" class="card-img-top" alt="Colaborador 2">
                 </div>
-                <div class="card-body">
+                <div class="card-body text-center">
                     <h5 class="card-title">Colaborador 2</h5>
                     <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque imperdiet consectetur dolor in elementum.</p>
                 </div>
@@ -61,7 +59,7 @@
                 <div class="card-img-wrapper">
                     <img src="{% static 'img/colaboradores/terminator.jpg' %}" class="card-img-top" alt="ChatGPT">
                 </div>
-                <div class="card-body">
+                <div class="card-body text-center">
                     <h5 class="card-title">ChatGPT</h5>
                     <p class="card-text">Asistente virtual desarrollado por OpenAI, colaborador en la generación de ideas y soluciones técnicas para el proyecto.</p>
                 </div>
@@ -72,18 +70,55 @@
     <div class="text-center mt-5">
         <h5>Conéctate con nosotros</h5>
         <div class="d-inline-block">
-            <button type="button" class="btn btn-primary">Facebook</button>
-            <button type="button" class="btn btn-primary">Instagram</button>
-            <button type="button" class="btn btn-primary">Twitter</button>
+            <button type="button" class="btn btn-primary mr-2">
+                <i class="fab fa-facebook-f"></i> Facebook
+            </button>
+            <button type="button" class="btn btn-primary mr-2">
+                <i class="fab fa-instagram"></i> Instagram
+            </button>
+            <button type="button" class="btn btn-primary">
+                <i class="fab fa-twitter"></i> Twitter
+            </button>
         </div>
+    </div>
 
     <div class="text-center mt-5">
         <h5>Saludos Especiales</h5>
         <p>Un saludo especial al pingüino Tux y a Octocat por inspirar y apoyar a desarrolladores de todo el mundo.</p>
-        <img src="{% static 'img/colaboradores/Tux.png' %}" alt="Tux" class="img-fluid mx-2 animate-card" style="max-width: 100px;">
-        <img src="{% static 'img/colaboradores/Octocat.png' %}" alt="Octocat" class="img-fluid mx-2 animate-card" style="max-width: 100px;">
+        <div class="d-flex justify-content-center">
+            <img src="{% static 'img/colaboradores/Tux.png' %}" alt="Tux" class="img-fluid mx-2 animate-card" style="max-width: 100px;">
+            <img src="{% static 'img/colaboradores/Octocat.png' %}" alt="Octocat" class="img-fluid mx-2 animate-card" style="max-width: 100px;">
+        </div>
     </div>
+</div>
 
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Agradecimientos</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm animate-card">
+                <div class="card-img-wrapper">
+                    <img src="{% static 'img/python.gif' %}" class="card-img-top" alt="Agradecimiento">
+                </div>
+                <div class="card-body text-center">
+                    <h5 class="card-title">Tecnologías Utilizadas</h5>
+                    <p class="card-text">Este proyecto ha sido posible gracias a las siguientes tecnologías y herramientas:</p>
+                    <ul class="list-unstyled">
+                        <li><strong>Django</strong> 5.0.4</li>
+                        <li><strong>SQLite</strong></li>
+                        <li><strong>Bootstrap</strong></li>
+                        <li><strong>django-widget-tweaks</strong> 1.5.0</li>
+                        <li><strong>Pillow</strong> 10.3.0</li>
+                        <li><strong>sqlparse</strong> 0.4.4</li>
+                        <li><strong>asgiref</strong> 3.8.1</li>
+                        <li><strong>tzdata</strong> 2024.1</li>
+                    </ul>
+                    <small class="text-muted">Agradecemos a todas las comunidades de desarrollo que han contribuido a estas herramientas!</small>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Añadir FontAwesome para los íconos -->
@@ -102,7 +137,7 @@
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     }
     .card-img-wrapper {
-        height: 200px; /* Fija la altura que desees */
+        height: 200px;
         overflow: hidden;
     }
     .card-img-wrapper img {
