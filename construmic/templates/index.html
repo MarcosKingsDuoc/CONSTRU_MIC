@@ -1,9 +1,14 @@
 {% extends 'base/base.html' %}
 {% load static %}
 
+
+
 {% block title %}Bienvenido/a a CONSTRU_MIC{% endblock %}
 
-
+{% block css %}
+ {{ block.super }}
+ <link rel="stylesheet" href="{% static 'css/pages/index_page.css' %}">
+{% endblock %}
 
 {% block header_page %}
 
@@ -14,13 +19,14 @@
   <h1>Bienvenido a CONSTRU_MIC</h1>
   {% endif %}
   <div style="display: flex; align-items: center;">
-    <img class="logo" src="{% static 'img/logo_construmic.png' %}" alt="">
+    <img class="logo" src="{% static 'img/logo/CONSTRU_MIC.png' %}" alt="">
     <p>Tienda de retail dedicada al hogar desde 2024!</p>
   </div>
 </div>
 
 
 {% endblock %}
+
 
 
 {% block content %}
@@ -32,21 +38,21 @@
   <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <a href="{% url 'lista_productos' %}">
+        <a href="#sector_img">
           <img class="d-block w-100" style="width: 800px; height: 600px;"
-            src="{% static 'img/tienda/tienda_img_1.jpg' %}" alt="First slide">
+            src="{% static 'img/carousel/1.png' %}" alt="First slide">
+        </a>
+      </div>
+      <div class="carousel-item">
+        <a href="{% url 'contacto_page' %}">
+          <img class="d-block w-100" style="width: 800px; height: 600px;"
+            src="{% static 'img/carousel/2.png' %}" alt="First slide">
         </a>
       </div>
       <div class="carousel-item">
         <a href="{% url 'lista_productos' %}">
           <img class="d-block w-100" style="width: 800px; height: 600px;"
-            src="{% static 'img/tienda/tienda_img_2.jpg' %}" alt="First slide">
-        </a>
-      </div>
-      <div class="carousel-item">
-        <a href="{% url 'lista_productos' %}">
-          <img class="d-block w-100" style="width: 800px; height: 600px;"
-            src="{% static 'img/tienda/tienda_img_3.jpg' %}" alt="First slide">
+            src="{% static 'img/carousel/3.png' %}" alt="First slide">
         </a>
       </div>
     </div>
@@ -60,7 +66,7 @@
     </a>
   </div>
 
-  <div class="container mt-4">
+  <div id="sector_img" class="container mt-4">
     <div class="row" style="margin-top: 30px;">
         <div class="col-md-6">
             <div class="card">
@@ -115,21 +121,6 @@
         </div>
     </div>
 </div>
-
-<style>
-
-    .card {
-        border: 1px solid #ddd;
-        transition: box-shadow 0.3s ease;
-        transition: transform 0.3s ease;
-    }
-    .card:hover {
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        transform: scale(1.05);
-    }
-</style>
-
-
 
 
   {% endblock %}
