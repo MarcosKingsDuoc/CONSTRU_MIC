@@ -88,10 +88,16 @@ WSGI_APPLICATION = 'construmic.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'DATABASE_NAME',
+        'USER': 'DATABASE_USER',
+        'PASSWORD': 'DATABASE_PASSWORD.',
+        'HOST': 'reyesdatabase.ddns.net', # Host personal Reyes
+        'PORT': '3306', # Puerto de MySQL
     }
 }
+
+
 
 
 # Password validation
