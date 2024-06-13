@@ -10,6 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+
+
+
 from pathlib import Path
 from os.path import join
 
@@ -86,12 +89,23 @@ WSGI_APPLICATION = 'construmic.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+
+from decouple import Config, RepositoryEnv # Dependencia para variables entorno
+
+config = Config(RepositoryEnv('.env')) # Cargador variables entorno
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': config('DATABASE_NAME'), # nombre de base de datos
+        'USER': config('DATABASE_USER'), # nombre de usuario
+        'PASSWORD': config('DATABASE_PASSWORD'), # password de usuario
+        'HOST': config('DATABASE_HOST'), # nombre del host
+        'PORT': '3306',  # Puerto de MySQL
     }
 }
+
+
 
 
 # Password validation
