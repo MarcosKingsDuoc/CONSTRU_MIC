@@ -1,0 +1,4 @@
+DATABASE_NAME=nombre_base_datos
+DATABASE_USER=nombre_usuario
+DATABASE_PASSWORD=contrase;a_usuario
+DATABASE_HOST=host_usuario

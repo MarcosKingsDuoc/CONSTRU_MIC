@@ -3,15 +3,16 @@
 <html lang="es">
 
 
-
+{% block css %} 
 <head>
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/pages/base.css' %}">
-    <link rel="icon" type="image/png" href="{% static 'img/logo_construmic.png' %}">
+    <link rel="icon" type="image/png" href="{% static 'img/logo/CONSTRU_MIC.png' %}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Mi Sitio Web{% endblock %}</title>
 </head>
+{% endblock %}
 
 <body>
 
@@ -25,7 +26,7 @@
         <div class="container mt-4">
             <h1>Texto de la cabecera</h1>
             <div class="centrado">
-                <img class="logo" src="{% static 'img/logo_construmic.png' %}" alt="">
+                <img class="logo" src="{% static 'img/logo/CONSTRU_MIC.png' %}" alt="">
                 <p>Información informativa realmente informante.</p>
             </div>
         </div>
