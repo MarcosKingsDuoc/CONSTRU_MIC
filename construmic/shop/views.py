@@ -2,7 +2,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.utils import timezone
 from django.contrib import messages
-from .models import Producto, Carrito, CarritoProducto, Pedido, PedidoProducto
+from .models import Producto, Carrito, CarritoProducto, Pedido, PedidoProducto 
+from Accounts.models import CustomUser
+
 
 def lista_productos(request):
     productos = Producto.objects.all()
@@ -122,7 +124,7 @@ def admin_agregar_producto(request):
         imagen = request.FILES.get('imagen')
         
         Producto.objects.create(nombre=nombre, descripcion=descripcion, precio=precio, stock=stock, imagen=imagen)
-        return redirect('admin_historial_compras')
+        return redirect('admin_lista_productos')
     
     return render(request, 'admin/admin_agregar_producto.html')
 
@@ -144,7 +146,7 @@ def admin_editar_producto(request, producto_id):
         if request.FILES.get('imagen'):
             producto.imagen = request.FILES.get('imagen')
         producto.save()
-        return redirect('admin_historial_compras')
+        return redirect('admin_lista_productos')
     
     return render(request, 'admin/admin_editar_producto.html', {'producto': producto})
 
@@ -154,9 +156,15 @@ def admin_eliminar_producto(request, producto_id):
     producto = get_object_or_404(Producto, id=producto_id)
     if request.method == 'POST':
         producto.delete()
-        return redirect('admin_historial_compras')
+        return redirect('admin_lista_productos')
     
     return render(request, 'admin/admin_eliminar_producto.html', {'producto': producto})
+
+@login_required
+def admin_lista_productos(request):
+    productos = Producto.objects.all()
+    return render(request, 'admin/admin_lista_productos.html', {'productos': productos})
+
 
 
 
@@ -168,3 +176,24 @@ def buscar_productos(request):
     query = request.GET.get('q')
     productos = Producto.objects.filter(nombre__icontains=query) | Producto.objects.filter(descripcion__icontains=query)
     return render(request, 'resultados_busqueda.html', {'productos': productos, 'query': query})
+
+@login_required
+def admin_lista_usuarios(request):
+    usuarios = CustomUser.objects.all()
+    for usuario in usuarios:
+        usuario.activar_desactivar_label = "Desactivar" if usuario.is_active else "Activar"
+    return render(request, 'admin/admin_lista_usuarios.html', {'usuarios': usuarios})
+
+
+@login_required
+def admin_activar_desactivar_usuario(request, user_id):
+    if request.user.id == user_id:
+        messages.error(request, 'No puedes cambiar tu propio estado de actividad.')
+        return redirect('admin_lista_usuarios')
+
+    usuario = get_object_or_404(CustomUser, id=user_id)
+    usuario.is_active = not usuario.is_active
+    usuario.save()
+    messages.success(request, f'El usuario {usuario.email} ha sido {"activado" if usuario.is_active else "desactivado"}.')
+    return redirect('admin_lista_usuarios')
+

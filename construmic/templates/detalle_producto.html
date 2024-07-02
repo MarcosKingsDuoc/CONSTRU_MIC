@@ -34,7 +34,7 @@
     <div class="row">
         <div class="col-md-6">
             {% if producto.imagen %}
-            <img class="card-img-top" src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+            <img class="card-img-top" src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" onerror="this.onerror=null;this.src='{% static 'img/producto_no_encontrado.jpg' %}';">
             {% else %}
             <img class="card-img-top" src="{% static 'img/producto_no_encontrado.jpg' %}" alt="producto sin imagen">
             {% endif %}

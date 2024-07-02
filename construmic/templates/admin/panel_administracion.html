@@ -6,15 +6,15 @@
 
 {% block content %}
 <div class="container mt-5">
-    <div class="row">
+    <div class="row mb-4">
         <div class="col-md-12 text-center">
             <h1>Panel Administrativo</h1>
-            <p>Bienvenido al panel administrativo. Aquí puedes gestionar productos y ver el historial de compras.</p>
+            <p class="lead">Bienvenido al panel administrativo. Aquí puedes gestionar productos y ver el historial de compras.</p>
         </div>
     </div>
-    <div class="row mt-4">
-        <div class="col-md-4">
-            <div class="card">
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100">
                 <div class="card-body text-center">
                     <h5 class="card-title">Historial de Compras</h5>
                     <p class="card-text">Revisa el historial de compras de los usuarios.</p>
@@ -22,8 +22,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card">
+        
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100">
                 <div class="card-body text-center">
                     <h5 class="card-title">Agregar Producto</h5>
                     <p class="card-text">Añade nuevos productos al catálogo.</p>
@@ -31,8 +32,29 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card">
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Lista de productos</h5>
+                    <p class="card-text">Revisar la lista completa de productos.</p>
+                    <a href="{% url 'admin_lista_productos' %}" class="btn btn-secondary">Ver Productos</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Lista de usuarios</h5>
+                    <p class="card-text">Revisar la lista completa de usuarios.</p>
+                    <a href="{% url 'admin_lista_usuarios' %}" class="btn btn-danger">Ver Usuarios</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100">
                 <div class="card-body text-center">
                     <h5 class="card-title">Salir del panel</h5>
                     <p class="card-text">Regresar al modo de usuario.</p>
