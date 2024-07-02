@@ -1,55 +1,40 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
-
-
-{% block css %} 
 <head>
+    {% block css %}
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/pages/base.css' %}">
     <link rel="icon" type="image/png" href="{% static 'img/logo/CONSTRU_MIC.png' %}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Mi Sitio Web{% endblock %}</title>
+    {% endblock %}
 </head>
-{% endblock %}
-
 <body>
-
-  {% include 'base/navbar.html' %}
+    {% include 'base/navbar.html' %}
     
     <main>
-      <div class="container">
-
-        {% block header_page %} 
-
-        <div class="container mt-4">
-            <h1>Texto de la cabecera</h1>
-            <div class="centrado">
-                <img class="logo" src="{% static 'img/logo/CONSTRU_MIC.png' %}" alt="">
-                <p>Información informativa realmente informante.</p>
+        <div class="container">
+            {% block header_page %}
+            <div class="container mt-4">
+                <h1>Texto de la cabecera</h1>
+                <div class="centrado">
+                    <img class="logo" src="{% static 'img/logo/CONSTRU_MIC.png' %}" alt="">
+                    <p>Información informativa realmente informante.</p>
+                </div>
             </div>
+            {% endblock %}
+    
+            {% block content %}
+            {% endblock %}
         </div>
-
-        {% endblock %}
-
-        {% block content %}
-        
-
-        {% endblock %}
-
-        
-      </div>
     </main>
-        
+    
     {% block footer %}
-    <footer>
-            
-    </footer>
-    {% endblock%}
-
     {% include 'base/footer.html' %}
-
+    {% endblock %}
+    
     <script src="{% static 'js/jquery-3.5.1.slim.min.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
