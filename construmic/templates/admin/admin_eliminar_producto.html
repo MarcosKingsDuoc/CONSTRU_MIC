@@ -13,7 +13,7 @@
     <form method="POST">
         {% csrf_token %}
         <button type="submit" class="btn btn-danger">Eliminar</button>
-        <a href="{% url 'admin_historial_compras' %}" class="btn btn-secondary">Cancelar</a>
+        <a href="{% url 'admin_lista_productos' %}" class="btn btn-secondary">Cancelar</a>
     </form>
 </div>
 {% endblock %}

@@ -8,8 +8,8 @@
 <div class="container mt-4">
     <h1>Detalles del producto</h1>
     <div style="display: flex; align-items: center;">
-      <img class="logo" src="{% static 'img/logo_construmic.png' %}" alt="">
-
+      <img class="logo" src="{% static 'img/logo/CONSTRU_MIC.png' %}" alt="">
+        <p>detalle del producto</p>
     </div>
 </div>
 
@@ -34,7 +34,7 @@
     <div class="row">
         <div class="col-md-6">
             {% if producto.imagen %}
-            <img class="card-img-top" src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+            <img class="card-img-top" src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" onerror="this.onerror=null;this.src='{% static 'img/producto_no_encontrado.jpg' %}';">
             {% else %}
             <img class="card-img-top" src="{% static 'img/producto_no_encontrado.jpg' %}" alt="producto sin imagen">
             {% endif %}

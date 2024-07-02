@@ -9,20 +9,25 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'admin_historial_compras' %}">Historial de Productos</a>
+                    <a class="nav-link" href="{% url 'admin_historial_compras' %}">Historial de compras</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'admin_agregar_producto' %}">Agregar Producto</a>
+                    <a class="nav-link" href="{% url 'admin_agregar_producto' %}">Agregar producto</a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'admin_lista_productos' %}">Lista de productos</a>
+                </li>
+
                 <li class="nav-item disabled">
-                    <a class="nav-link" href="{% url 'admin_agregar_producto' %}">Revisar Usuarios</a>
+                    <a class="nav-link" href="{% url 'admin_lista_usuarios' %}">Revisar usuarios</a>
                 </li>
 
             </ul>
 
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/" style="color: white;">Humano</a>
+                    <a class="nav-link" href="/" style="color: white;">Regresar</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'cerrar_sesion_page' %}">Cerrar sesión</a>

@@ -34,7 +34,7 @@
         <div class="col-md-4">
             <div class="card mb-4" style="width: 100%;">
                 {% if producto.imagen %}
-                <img class="card-img-top" src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+                <img class="card-img-top" src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" onerror="this.onerror=null;this.src='{% static 'img/producto_no_encontrado.jpg' %}';">
                 {% else %}
                 <img class="card-img-top" src="{% static 'img/producto_no_encontrado.jpg' %}" alt="producto sin imagen">
                 {% endif %}
@@ -55,5 +55,10 @@
 {% else %}
 <p>No se encontraron productos que coincidan con tu búsqueda.</p>
 {% endif %}
+
+
+{% block footer %}
+{% endblock %}
+
 
 {% endblock %}
