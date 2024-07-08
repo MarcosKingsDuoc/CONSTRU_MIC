@@ -20,6 +20,8 @@ urlpatterns = [
     path('admin/lista_productos/', views.admin_lista_productos, name='admin_lista_productos'),
     path('admin/lista_usuarios/', views.admin_lista_usuarios, name='admin_lista_usuarios'),
     path('admin/activar_desactivar_usuario/<int:user_id>/', views.admin_activar_desactivar_usuario, name='admin_activar_desactivar_usuario'),
+    path('admin/reporte/excel/', views.generar_reporte_excel, name='generar_reporte_excel'), # Requerimiento excel
+    path('admin/reporte/pdf/', views.generar_reporte_pdf, name='generar_reporte_pdf'), # Requerimiento PDF
 
 ]
 

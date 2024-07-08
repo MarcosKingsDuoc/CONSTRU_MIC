@@ -56,12 +56,24 @@
         <div class="col-md-4 mb-4">
             <div class="card shadow-sm h-100">
                 <div class="card-body text-center">
+                    <h5 class="card-title">Generar un reporte de ventas</h5>
+                    <p class="card-text">Genera un reporte de las ventas en distintos formatos.</p>
+                    <a href="{% url 'generar_reporte_excel' %}" class="btn btn-success">Excel</a>
+                    <a href="{% url 'generar_reporte_pdf' %}" class="btn btn-danger">PDF</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body text-center">
                     <h5 class="card-title">Salir del panel</h5>
                     <p class="card-text">Regresar al modo de usuario.</p>
                     <a href="{% url 'inicio_page' %}" class="btn btn-warning">Ir al Panel</a>
                 </div>
             </div>
         </div>
+
     </div>
 </div>
 {% endblock %}
