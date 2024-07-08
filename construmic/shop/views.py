@@ -5,6 +5,22 @@ from django.contrib import messages
 from .models import Producto, Carrito, CarritoProducto, Pedido, PedidoProducto 
 from Accounts.models import CustomUser
 
+# Reporte Excel requerimientos
+
+from django.utils.timezone import localtime
+
+
+import pandas as pd
+from django.http import HttpResponse
+from .forms import RangoFechasForm
+from .models import Pedido, PedidoProducto
+
+
+# Reporte PDF requerimientos
+
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+
 
 def lista_productos(request):
     productos = Producto.objects.all()
@@ -196,4 +212,73 @@ def admin_activar_desactivar_usuario(request, user_id):
     usuario.save()
     messages.success(request, f'El usuario {usuario.email} ha sido {"activado" if usuario.is_active else "desactivado"}.')
     return redirect('admin_lista_usuarios')
+
+
+# Reporte Excel
+
+@user_passes_test(lambda u: u.is_staff)
+@login_required
+def generar_reporte_excel(request):
+    if request.method == 'POST':
+        form = RangoFechasForm(request.POST)
+        if form.is_valid():
+            fecha_inicio = form.cleaned_data['fecha_inicio']
+            fecha_fin = form.cleaned_data['fecha_fin']
+            pedidos = Pedido.objects.filter(fecha__range=[fecha_inicio, fecha_fin])
+            data = []
+            for pedido in pedidos:
+                productos = PedidoProducto.objects.filter(pedido=pedido)
+                for producto in productos:
+                    data.append({
+                        'ID Pedido': pedido.id,
+                        'Usuario': pedido.usuario.email,
+                        'Fecha': localtime(pedido.fecha).strftime('%Y-%m-%d %H:%M:%S'),
+                        'Total': pedido.total,
+                        'Producto': producto.producto.nombre,
+                        'Cantidad': producto.cantidad,
+                        'Precio': producto.precio,
+                    })
+            df = pd.DataFrame(data)
+            response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+            response['Content-Disposition'] = 'attachment; filename=reporte_ventas.xlsx'
+            df.to_excel(response, index=False)
+            return response
+    else:
+        form = RangoFechasForm()
+    return render(request, 'admin/admin_generar_reporte_excel.html', {'form': form})
+
+
+# Reporte PDF
+
+@user_passes_test(lambda u: u.is_staff)
+@login_required
+def generar_reporte_pdf(request):
+    if request.method == 'POST':
+        form = RangoFechasForm(request.POST)
+        if form.is_valid():
+            fecha_inicio = form.cleaned_data['fecha_inicio']
+            fecha_fin = form.cleaned_data['fecha_fin']
+            pedidos = Pedido.objects.filter(fecha__range=[fecha_inicio, fecha_fin])
+            response = HttpResponse(content_type='application/pdf')
+            response['Content-Disposition'] = 'attachment; filename=reporte_ventas.pdf'
+            p = canvas.Canvas(response, pagesize=letter)
+            y = 750
+            for pedido in pedidos:
+                productos = PedidoProducto.objects.filter(pedido=pedido)
+                p.drawString(100, y, f'Pedido ID: {pedido.id} - Usuario: {pedido.usuario.email} - Fecha: {pedido.fecha} - Total: {pedido.total}')
+                y -= 15
+                for producto in productos:
+                    p.drawString(120, y, f'{producto.cantidad} x {producto.producto.nombre} - Precio: {producto.precio}')
+                    y -= 15
+                y -= 10
+                if y < 50:
+                    p.showPage()
+                    y = 750
+            p.showPage()
+            p.save()
+            return response
+    else:
+        form = RangoFechasForm()
+    return render(request, 'admin/admin_generar_reporte_pdf.html', {'form': form})
+
 
